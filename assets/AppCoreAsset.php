@@ -11,7 +11,7 @@ use yii\web\View;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class AppLoginAsset extends AssetBundle
+class AppCoreAsset extends AssetBundle
 {
     public function init()
     {

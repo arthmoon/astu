@@ -1,18 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-use app\assets\AppLoginAsset;
-use yii\widgets\ActiveForm;
-use app\models\LoginForm;
+use app\assets\AppCoreAsset;
 use yii\helpers\Url;
 
-AppLoginAsset::register($this);
-
-$LoginForm = new LoginForm();
-if ($LoginForm->load(Yii::$app->request->post()) && $LoginForm->login()) {
-    return $this->goBack();
-}
-$LoginForm->password = '';
+AppCoreAsset::register($this);
 
 ?>
 <?php $this->beginPage() ?>
@@ -45,6 +37,7 @@ $LoginForm->password = '';
         </ul>
     </div>
 
+    <!--
     <div class="navbar-collapse collapse" id="navbar-mobile">
         <ul class="nav navbar-nav navbar-right">
             <li>
@@ -67,6 +60,7 @@ $LoginForm->password = '';
             </li>
         </ul>
     </div>
+    -->
 </div>
 <!-- /main navbar -->
 
@@ -83,51 +77,7 @@ $LoginForm->password = '';
             <!-- Content area -->
             <div class="content">
 
-                <?php $form = ActiveForm::begin([
-                    'id' => 'login-form',
-                    'fieldConfig' => [
-                        'template' => "{input}",
-                    ],
-                ]); ?>
-
-                <div class="panel panel-body login-form">
-                    <div class="text-center">
-                        <div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
-                        <h5 class="content-group">Вход в систему<small class="display-block">Введите логин и пароль</small></h5>
-                    </div>
-
-                    <div class="form-group has-feedback has-feedback-left">
-                        <?= $form->field($LoginForm, 'username')->textInput([
-                            'autofocus' => true,
-                            'class' => 'form-control',
-                            'placeholder' => 'Username'
-                        ]) ?>
-                        <div class="form-control-feedback">
-                            <i class="icon-user text-muted"></i>
-                        </div>
-                    </div>
-
-                    <div class="form-group has-feedback has-feedback-left">
-                        <?= $form->field($LoginForm, 'password')->passwordInput() ?>
-                        <div class="form-control-feedback">
-                            <i class="icon-lock2 text-muted"></i>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <?= Html::submitButton('Login <i class="icon-circle-right2 position-right"></i>', [
-                            'class' => 'btn btn-primary btn-block',
-                            'name' => 'login-button'
-                        ]) ?>
-                    </div>
-
-                    <div class="text-center">
-                        <a href="login_password_recover.html">Забыли пароль?</a>
-                    </div>
-                </div>
-
-
-                <?php ActiveForm::end(); ?>
+                <?= $content ?>
 
                 <!-- Footer -->
                 <div class="footer text-muted">
