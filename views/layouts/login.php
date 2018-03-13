@@ -37,12 +37,11 @@ AppCoreAsset::register($this);
         </ul>
     </div>
 
-    <!--
     <div class="navbar-collapse collapse" id="navbar-mobile">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="<?= Url::home() ?>">
-                    <i class="icon-display4"></i> <span class="visible-xs-inline-block position-right"> Главная</span>
+                <a href="<?= Url::to(['site/about']) ?>">
+                    <i class="icon-help"></i> <span class="visible-xs-inline-block position-right"> О проекте</span>
                 </a>
             </li>
 
@@ -51,16 +50,8 @@ AppCoreAsset::register($this);
                     <i class="icon-user-tie"></i> <span class="visible-xs-inline-block position-right"> Написать администратору</span>
                 </a>
             </li>
-
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-cog3"></i>
-                    <span class="visible-xs-inline-block position-right"> Настройки</span>
-                </a>
-            </li>
         </ul>
     </div>
-    -->
 </div>
 <!-- /main navbar -->
 

@@ -8,61 +8,86 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 
-$this->title = 'Contact';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Дефекты | Обращение в техническую поддержку';
 ?>
-<div class="site-contact">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <div class="panel registration-form">
+            <div class="panel-body">
+                <div class="text-justify">
+                    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
-        <div class="alert alert-success">
-            Thank you for contacting us. We will respond to you as soon as possible.
-        </div>
+                        <div class="alert alert-success">
+                            Ваше обращение зарегистрировано.
+                        </div>
 
-        <p>
-            Note that if you turn on the Yii debugger, you should be able
-            to view the mail message on the mail panel of the debugger.
-            <?php if (Yii::$app->mailer->useFileTransport): ?>
-                Because the application is in development mode, the email is not sent but saved as
-                a file under <code><?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?></code>.
-                Please configure the <code>useFileTransport</code> property of the <code>mail</code>
-                application component to be false to enable email sending.
-            <?php endif; ?>
-        </p>
+                        <p>
+                            Специалист технической поддержки свяжется с Вами в ближайшее время
+                            <?php if (Yii::$app->mailer->useFileTransport): ?>
+                                Поскольку приложение навходится в режиме разработки, письмо не было отправлено.<br/>
+                                Файл с текстом письма находится:<br/>
+                                <code><?= Yii::getAlias(Yii::$app->mailer->fileTransportPath) ?></code>.
+                                Настройте свойство <code>useFileTransport</code> модуля <code>mail</code>
+                                для отправки email сообщений.
+                            <?php endif; ?>
+                        </p>
 
-    <?php else: ?>
+                    <?php else: ?>
 
-        <p>
-            If you have business inquiries or other questions, please fill out the following form to contact us.
-            Thank you.
-        </p>
+                        <h4>Обращение в службу технической поддержки</h4>
 
-        <div class="row">
-            <div class="col-lg-5">
+                        <?php $form = ActiveForm::begin([
+                            'id' => 'contact-form',
+                            'fieldConfig' => [
+                                'template' => "{label}{input}<small>{error}</small>",
+                            ],
+                        ]); ?>
 
-                <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+                        <div class="form-group">
+                            <?= $form->field($model, 'name')->textInput([
+                                'autofocus' => true,
+                                'class' => 'form-control'
+                            ]) ?>
+                        </div>
 
-                    <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+                        <div class="form-group">
+                            <?= $form->field($model, 'email')->input('email', [
+                                'class' => 'form-control'
+                            ]) ?>
+                        </div>
 
-                    <?= $form->field($model, 'email') ?>
+                        <div class="form-group">
+                            <?= $form->field($model, 'subject')->textInput([
+                                'class' => 'form-control'
+                            ]) ?>
+                        </div>
 
-                    <?= $form->field($model, 'subject') ?>
+                        <div class="form-group">
+                            <?= $form->field($model, 'body')->textarea([
+                                'rows' => 6,
+                                'class' => 'form-control'
+                            ]) ?>
+                        </div>
 
-                    <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
+                        <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                                'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-9">{input}</div></div>',
+                        ]) ?>
 
-                    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                    ]) ?>
+                        <div class="form-group">
+                            <?= Html::submitButton('Отправить', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                        </div>
 
-                    <div class="form-group">
-                        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
-                    </div>
+                        <?php ActiveForm::end(); ?>
 
-                <?php ActiveForm::end(); ?>
-
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
+    </div>
+</div>
 
-    <?php endif; ?>
+<div class="site-contact">
+
+
 </div>

@@ -20,12 +20,22 @@ use yii\web\IdentityInterface;
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
+ * @property integer $name
+ * @property integer $fname
+ * @property integer $img
+ * @property integer $role
+ * @property string $rank
  * @property string $password write-only password
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const STATUS_DELETED = 0;
-    const STATUS_ACTIVE = 10;
+    const STATUS_DELETED    = 0;
+    const STATUS_ACTIVE     = 10;
+
+    const ROLE_GOD          = 999;
+    const ROLE_HUMAN        = 777;
+    const ROLE_BONDMAN      = 1;
+    const ROLE_NONENTITY    = 0;
 
     /**
      * @inheritdoc

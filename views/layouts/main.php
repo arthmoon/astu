@@ -23,10 +23,6 @@
 
     <link href="//fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
 
-    <!-- Theme JS files -->
-
-    <!-- /theme JS files -->
-
 </head>
 
 <body class="sidebar-xs">
@@ -34,7 +30,7 @@
 <!-- Main navbar -->
 <div class="navbar navbar-inverse">
     <div class="navbar-header">
-        <a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt=""></a>
+        <a class="navbar-brand" href="<?= Url::home() ?>"><img src="assets/images/logo.png" alt=""></a>
 
         <ul class="nav navbar-nav visible-xs-block">
             <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -51,7 +47,61 @@
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class=" icon-list2"></i>
+                    <i class=" icon-comments"></i>
+                    <span class="visible-xs-inline-block position-right">Сообщения</span>
+                    <span class="badge bg-warning-400">2</span>
+                </a>
+
+                <div class="dropdown-menu dropdown-content width-350">
+                    <div class="dropdown-content-heading">
+                        Сообщения
+                        <ul class="icons-list">
+                            <li><a href="#"><i class="icon-compose"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <ul class="media-list dropdown-content-body">
+                        <li class="media">
+                            <div class="media-left">
+                                <img src="assets/images/user/user1.png" class="img-circle img-sm" alt="">
+                                <span class="badge bg-danger-400 media-badge">1</span>
+                            </div>
+
+                            <div class="media-body">
+                                <a href="#" class="media-heading">
+                                    <span class="text-semibold">Евгений Кобыличенко</span>
+                                    <span class="media-annotation pull-right">11:36</span>
+                                </a>
+
+                                <span class="text-muted">Добавил дефект по ПС Балей</span>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <div class="media-left">
+                                <img src="assets/images/user/user8.png" class="img-circle img-sm" alt="">
+                                <span class="badge bg-danger-400 media-badge">1</span>
+                            </div>
+
+                            <div class="media-body">
+                                <a href="#" class="media-heading">
+                                    <span class="text-semibold">Евгений Орлов</span>
+                                    <span class="media-annotation pull-right">11:36</span>
+                                </a>
+
+                                <span class="text-muted">Необходимо подготовить отчет для ГИ. Срочно!</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="dropdown-content-footer">
+                        <a href="#" data-popup="tooltip" title="Все задачи"><i class="icon-menu display-block"></i></a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class=" icon-task"></i>
                     <span class="visible-xs-inline-block position-right">Задачи</span>
                     <span class="badge bg-warning-400">1</span>
                 </a>
@@ -90,14 +140,13 @@
 
             <li class="dropdown dropdown-user">
                 <a class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="assets/images/user/user2.png" alt="">
-                    <span>Оператор</span>
+                    <img src="assets/<?= Yii::$app->user->identity['img'] ?>" alt="">
+                    <span><?= Yii::$app->user->identity['name'].' '.Yii::$app->user->identity['fname'] ?></span>
                     <i class="caret"></i>
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li><a href="#"><i class="icon-user-plus"></i> Профиль</a></li>
-                    <li><a href="#"><span class="badge bg-teal-400 pull-right">1</span> <i class="icon-comment-discussion"></i> Сообщения</a></li>
                     <li class="divider"></li>
                     <li><a href="#"><i class="icon-cog5"></i> Настройки</a></li>
                     <li>
@@ -140,7 +189,7 @@
                                     <li><a href="layout_navbar_sidebar_fixed.html">Подстанции</a></li>
                                     <li><a href="layout_sidebar_fixed_native.html">Сотрудники</a></li>
                                     <li class="navigation-divider"></li>
-                                    <li><a href="layout_footer_fixed.html">Номенклатура оборудования</a></li>
+                                    <li><a href="layout_footer_fixed.html">Оборудование</a></li>
                                     <li class="navigation-divider"></li>
                                     <li><a href="layout_navbar_fixed.html">Телесигналы</a></li>
                                 </ul>

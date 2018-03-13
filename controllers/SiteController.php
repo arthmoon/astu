@@ -9,7 +9,6 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
-use app\models\User;
 
 class SiteController extends Controller
 {
@@ -21,7 +20,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout', 'add-user', 'index', 'contact', 'about'],
+                'only' => ['logout', 'add-user', 'index'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -107,6 +106,8 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
+        $this->layout = 'login';
+
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
@@ -125,12 +126,12 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+        $this->layout = 'login';
+
         return $this->render('about');
     }
 
-    /**
-     * Add admin
-     */
+    /*
     public function actionAddAdmin() {
         $model = User::find()->where(['username' => 'admin'])->one();
         if (empty($model)) {
@@ -144,4 +145,5 @@ class SiteController extends Controller
             }
         }
     }
+    */
 }

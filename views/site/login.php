@@ -9,6 +9,7 @@ use yii\bootstrap\ActiveForm;
 use app\models\LoginForm;
 
 $this->title = 'Дефекты | Авторизация';
+
 $this->registerJsFile('assets/js/core/app.js', [
     'position' => \yii\web\View::POS_HEAD,
     'depends' => \app\assets\AppCoreAsset::className()
