@@ -41,6 +41,7 @@
     <div class="navbar-collapse collapse" id="navbar-mobile">
         <ul class="nav navbar-nav">
             <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+            <li><a class="sidebar-control sidebar-secondary-hide hidden-xs"><i class="icon-transmission"></i></a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -189,7 +190,13 @@
                                     <li><a href="layout_navbar_sidebar_fixed.html">Подстанции</a></li>
                                     <li><a href="layout_sidebar_fixed_native.html">Сотрудники</a></li>
                                     <li class="navigation-divider"></li>
-                                    <li><a href="layout_footer_fixed.html">Оборудование</a></li>
+                                    <li>
+                                        <a href="layout_footer_fixed.html">Оборудование</a>
+                                        <ul>
+                                            <li><a href="">Номенклатура</a></li>
+                                            <li><a href="">Дерево</a></li>
+                                        </ul>
+                                    </li>
                                     <li class="navigation-divider"></li>
                                     <li><a href="layout_navbar_fixed.html">Телесигналы</a></li>
                                 </ul>
@@ -205,6 +212,150 @@
             </div>
         </div>
         <!-- /main sidebar -->
+
+        <!-- Secondary sidebar -->
+        <div class="sidebar sidebar-secondary sidebar-default">
+            <div class="sidebar-content">
+
+                <!-- Sidebar search -->
+                <div class="sidebar-category">
+                    <div class="category-title">
+                        <span>Поиск</span>
+                        <ul class="icons-list">
+                            <li><a href="#" data-action="collapse"></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="category-content">
+                        <form action="." method="get">
+                            <div class="has-feedback has-feedback-left">
+                                <?= Html::input('search', 'search_string', Yii::$app->request->get('search_string'), [
+                                    'class' => 'form-control js-action--submit-form-on-enter',
+                                    'placeholder' => 'Поиск',
+                                ])?>
+                                <div class="form-control-feedback">
+                                    <i class="icon-search4 text-size-base text-muted"></i>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /sidebar search -->
+
+
+                <!-- Sub navigation -->
+                <div class="sidebar-category">
+                    <div class="category-title">
+                        <span>Фильтр</span>
+                        <ul class="icons-list">
+                            <li><a href="#" data-action="collapse"></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="category-content">
+                        <div class="form-group">
+                            <label>Тип дефекта:</label>
+
+                            <?= Html::input('select','to_user', Yii::$app->request->get('to_user'), [
+                                'class' => 'form-control'
+                            ]) ?>
+                            <select class="form-control">
+                                <option>Все</option>
+                                <option>Проблема</option>
+                                <option>ТО</option>
+                                <option>Задача</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button type="reset" class="btn btn-danger btn-block">Сбросить</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button type="submit" class="btn btn-info btn-block">Применить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /sub navigation -->
+
+
+                <!-- Form sample -->
+                <div class="sidebar-category">
+                    <div class="category-title">
+                        <span>Сообщение</span>
+                        <ul class="icons-list">
+                            <li><a href="#" data-action="collapse"></a></li>
+                        </ul>
+                    </div>
+
+                    <form action="#" class="category-content">
+                        <div class="form-group">
+                            <label>Кому:</label>
+                            <select class="form-control">
+                                <option>Всем</option>
+                                <option>Алексей Сучков</option>
+                                <option>Максим Евдокимов</option>
+                                <option>Евгений Кобыличенко</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Текст:</label>
+                            <textarea rows="3" cols="3" class="form-control" placeholder="Default textarea"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button type="reset" class="btn btn-danger btn-block">Очистить</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button type="submit" class="btn btn-info btn-block">Отправить</button>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="navigation navigation-alt navigation-accordion">
+                        <li class="navigation-divider"></li>
+                    </ul>
+                </div>
+                <!-- /form sample -->
+                <!-- Form sample -->
+                <div class="sidebar-category">
+                    <div class="category-title">
+                        <span>Задача</span>
+                        <ul class="icons-list">
+                            <li><a href="#" data-action="collapse"></a></li>
+                        </ul>
+                    </div>
+
+                    <form action="#" class="category-content">
+                        <div class="form-group">
+                            <label>Кому:</label>
+                            <select class="form-control">
+                                <option>Всем</option>
+                                <option>Алексей Сучков</option>
+                                <option>Максим Евдокимов</option>
+                                <option>Евгений Кобыличенко</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Описание:</label>
+                            <textarea rows="3" cols="3" class="form-control" placeholder="Default textarea"></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button type="reset" class="btn btn-danger btn-block">Очистить</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button type="submit" class="btn btn-info btn-block">Отправить</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /form sample -->
+
+            </div>
+        </div>
+        <!-- /secondary sidebar -->
 
 
         <!-- Main content -->

@@ -45,6 +45,18 @@ class User extends ActiveRecord implements IdentityInterface
         return '{{%user}}';
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Имя',
+            'fname' => 'Фамилия',
+            'img' => 'Изображение',
+            'username' => 'Логин',
+            'rank' => 'Должность',
+            'role' => 'Роль',
+        ];
+    }
+
     /**
      * @inheritdoc
      */
