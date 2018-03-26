@@ -3,12 +3,14 @@
 namespace app\controllers;
 
 use Yii;
+use yii\base\DynamicModel;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\imagine\Image;
 
 class SiteController extends Controller
 {
@@ -130,6 +132,35 @@ class SiteController extends Controller
 
         return $this->render('about');
     }
+
+    public function actionImage($file_name, $width = null, $height = null)
+    {
+        $model = DynamicModel::validateData(Yii::$app->request->get(), [
+            ['file_name', 'required'],
+            [['width', 'height'], 'safe']
+        ]);
+
+        if ($model->hasErrors())
+        {
+            return 'validation error';
+        }
+
+        if (!isset($width) && !isset($height))
+        {
+            Yii::$app->response->sendFile(Yii::getAlias('@webroot/upload/'.$file_name));
+        }
+        else
+        {
+            $image = Image::resize(Yii::getAlias('@webroot/upload/'.$file_name), $width, $height);
+
+            Yii::$app->response->sendContentAsFile($image->get('jpg'), '123.jpg');
+        }
+    }
+    /*
+        $file_name = '45.jpg';
+        $image = Image::resize(Yii::getAlias('@webroot/upload/'.$file_name), 200,200);
+        $image->save(Yii::getAlias('@webroot/thumbs/200x200/'.$file_name));
+    */
 
     /*
     public function actionAddAdmin() {

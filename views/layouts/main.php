@@ -3,6 +3,7 @@
     use yii\helpers\Html;
     use yii\helpers\Url;
     use app\assets\AppCoreAsset;
+    use app\components\widget\Alert;
 
     AppCoreAsset::register($this);
 
@@ -35,6 +36,7 @@
         <ul class="nav navbar-nav visible-xs-block">
             <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
             <li><a class="sidebar-mobile-main-toggle"><i class="icon-paragraph-justify3"></i></a></li>
+            <li><a class="sidebar-mobile-secondary-toggle"><i class="icon-more"></i></a></li>
         </ul>
     </div>
 
@@ -256,9 +258,6 @@
                         <div class="form-group">
                             <label>Тип дефекта:</label>
 
-                            <?= Html::input('select','to_user', Yii::$app->request->get('to_user'), [
-                                'class' => 'form-control'
-                            ]) ?>
                             <select class="form-control">
                                 <option>Все</option>
                                 <option>Проблема</option>
@@ -267,20 +266,25 @@
                             </select>
                         </div>
                         <div class="row">
-                            <div class="col-xs-6">
-                                <button type="reset" class="btn btn-danger btn-block">Сбросить</button>
+                            <div class="col-xs-4">
+                                <button type="reset" class="btn btn-icon btn-flat btn-xs text-warning-600">
+                                    <i class="icon-cross2"></i>
+                                </button>
                             </div>
-                            <div class="col-xs-6">
-                                <button type="submit" class="btn btn-info btn-block">Применить</button>
+                            <div class="col-xs-8 text-right">
+                                <button type="submit" class="btn btn-info btn-labeled btn-xs">
+                                    <b><i class="icon-filter3"></i></b>
+                                    Применить
+                                </button>
                             </div>
+
                         </div>
                     </div>
                 </div>
                 <!-- /sub navigation -->
 
-
                 <!-- Form sample -->
-                <div class="sidebar-category">
+                <div class="sidebar-category category-collapsed">
                     <div class="category-title">
                         <span>Сообщение</span>
                         <ul class="icons-list">
@@ -300,25 +304,33 @@
                         </div>
                         <div class="form-group">
                             <label>Текст:</label>
-                            <textarea rows="3" cols="3" class="form-control" placeholder="Default textarea"></textarea>
+                            <?= Html::textarea('msg_text', '', [
+                                'rows' => 3,
+                                'cols' => 3,
+                                'class' => 'form-control',
+                                'placeholder' => 'Сообщение'
+                            ]) ?>
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-6">
-                                <button type="reset" class="btn btn-danger btn-block">Очистить</button>
+                            <div class="col-xs-4">
+                                <button type="reset" class="btn btn-icon btn-flat btn-xs text-warning-600">
+                                    <i class="icon-cross2"></i>
+                                </button>
                             </div>
-                            <div class="col-xs-6">
-                                <button type="submit" class="btn btn-info btn-block">Отправить</button>
+                            <div class="col-xs-8 text-right">
+                                <button type="submit" class="btn btn-info btn-labeled btn-xs">
+                                    <b><i class="icon-envelop"></i></b>
+                                    Отправить
+                                </button>
                             </div>
+
                         </div>
                     </form>
-                    <ul class="navigation navigation-alt navigation-accordion">
-                        <li class="navigation-divider"></li>
-                    </ul>
                 </div>
                 <!-- /form sample -->
                 <!-- Form sample -->
-                <div class="sidebar-category">
+                <div class="sidebar-category category-collapsed">
                     <div class="category-title">
                         <span>Задача</span>
                         <ul class="icons-list">
@@ -338,16 +350,27 @@
                         </div>
                         <div class="form-group">
                             <label>Описание:</label>
-                            <textarea rows="3" cols="3" class="form-control" placeholder="Default textarea"></textarea>
+                            <?= Html::textarea('task_text', '', [
+                                'rows' => 3,
+                                'cols' => 3,
+                                'class' => 'form-control',
+                                'placeholder' => 'Задача'
+                            ]) ?>
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-6">
-                                <button type="reset" class="btn btn-danger btn-block">Очистить</button>
+                            <div class="col-xs-4">
+                                <button type="reset" class="btn btn-icon btn-flat btn-xs text-warning-600">
+                                    <i class="icon-cross2"></i>
+                                </button>
                             </div>
-                            <div class="col-xs-6">
-                                <button type="submit" class="btn btn-info btn-block">Отправить</button>
+                            <div class="col-xs-8 text-right">
+                                <button type="submit" class="btn btn-info btn-labeled btn-xs">
+                                    <b><i class="icon-clipboard5"></i></b>
+                                    Отправить
+                                </button>
                             </div>
+
                         </div>
                     </form>
                 </div>
@@ -393,6 +416,8 @@
 
             <!-- Content area -->
             <div class="content">
+
+                <?= Alert::widget();?>
 
                 <?= $content ?>
 
