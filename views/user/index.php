@@ -1,72 +1,65 @@
 <?php
-
+use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
+use kartik\grid\GridView;
+use johnitvn\ajaxcrud\CrudAsset; 
+use johnitvn\ajaxcrud\BulkButtonWidget;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Пользователи';
+$this->title = 'Users';
+$this->params['breadcrumbs'][] = $this->title;
 
-$this->registerJsFile('assets/js/core/app.js', [
-    'position' => \yii\web\View::POS_HEAD,
-    'depends' => \app\assets\AppCoreAsset::className()
-]);
-
-$this->registerJsFile('assets/js/script.js', [
-    'position' => \yii\web\View::POS_HEAD,
-    'depends' => \app\assets\AppCoreAsset::className()
-]);
+CrudAsset::register($this);
 
 ?>
-
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <div class="panel panel-flat">
-        <div class="panel-heading">
-            <h5 class="panel-title">Пользователи</h5>
-            <div class="heading-elements">
-                <ul class="icons-list">
-                    <li><a data-action="collapse"></a></li>
-                    <li><a data-action="reload"></a></li>
-                    <li><a data-action="close"></a></li>
-                </ul>
-            </div>
-        </div>
-
-        <?= GridView::widget([
+<div class="user-index">
+    <div id="ajaxCrudDatatable">
+        <?=GridView::widget([
+            'id'=>'crud-datatable',
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
-            'layout' => '<div class="panel-body">{summary}</div>{items}{pager}',
-            'tableOptions' => [
-                    'class' => 'table table-sm'
-            ],
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-                'id',
-                'username',
-                //'auth_key',
-                //'password_hash',
-                //'password_reset_token',
-                'email:email',
-                //'status',
-                //'created_at',
-                //'updated_at',
-                'name',
-                'fname',
-                'img',
-                'rank',
-                'role',
-
-                ['class' => 'yii\grid\ActionColumn'],
-            ],
-        ]); ?>
+            'pjax'=>true,
+            'columns' => require(__DIR__.'/_columns.php'),
+            'toolbar'=> [
+                ['content'=>
+                    Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'],
+                    ['role'=>'modal-remote','title'=> 'Create new Users','class'=>'btn btn-default']).
+                    Html::a('<i class="glyphicon glyphicon-repeat"></i>', [''],
+                    ['data-pjax'=>1, 'class'=>'btn btn-default', 'title'=>'Reset Grid']).
+                    '{toggleData}'.
+                    '{export}'
+                ],
+            ],          
+            'striped' => true,
+            'condensed' => true,
+            'responsive' => true,          
+            'panel' => [
+                'type' => 'primary', 
+                'heading' => '<i class="glyphicon glyphicon-list"></i> Users listing',
+                'before'=>'<em>* Resize table columns just like a spreadsheet by dragging the column edges.</em>',
+                'after'=>BulkButtonWidget::widget([
+                            'buttons'=>Html::a('<i class="glyphicon glyphicon-trash"></i>&nbsp; Delete All',
+                                ["bulk-delete"] ,
+                                [
+                                    "class"=>"btn btn-danger btn-xs",
+                                    'role'=>'modal-remote-bulk',
+                                    'data-confirm'=>false, 'data-method'=>false,// for overide yii data api
+                                    'data-request-method'=>'post',
+                                    'data-confirm-title'=>'Are you sure?',
+                                    'data-confirm-message'=>'Are you sure want to delete this item'
+                                ]),
+                        ]).                        
+                        '<div class="clearfix"></div>',
+            ]
+        ])?>
     </div>
-    <?php Pjax::end(); ?>
+</div>
+<?php Modal::begin([
+    "id"=>"ajaxCrudModal",
+    "footer"=>"",// always need it for jquery plugin
+])?>
+<?php Modal::end(); ?>

@@ -22,7 +22,8 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
+            'authTimeout' => 300,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -54,6 +55,9 @@ $config = [
                 'login' => 'site/login'
             ],
         ],
+    ],
+    'modules' => [
+        'gridview' => 'kartik\grid\Module'
     ],
     'params' => $params,
 ];
